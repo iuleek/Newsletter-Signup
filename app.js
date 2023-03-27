@@ -1,4 +1,6 @@
 //jshint esversion:6
+//This specific code won't work here because of the api key but I received a new one and the newsletter it's live at https://newsletter-signup-page.glitch.me/
+
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -47,7 +49,7 @@ app.post("/", function (req, res) {
         );
         
     }
-    run();
+      run();
     run().catch(e => res.sendFile(__dirname + "/failure.html"));
 });
 
@@ -55,9 +57,21 @@ app.post("/failure", function (req, res) {
     res.redirect("/");
 })
 
-app.listen(3000, function (req, res) {
-    console.log("Server is running on port 3000.")
-});
+//The code below this is for running locally the server, this is for running it on Glitch
+app.listen(
+  { port: process.env.PORT, host: "0.0.0.0" },
+  function (err, address) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    console.log(`Your app is listening on ${address}`);
+  }
+);
+
+//app.listen(3000, function (req, res) {
+   // console.log("Server is running on port 3000.")
+//});
 
 
 //API Key
